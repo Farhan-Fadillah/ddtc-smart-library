@@ -2,7 +2,9 @@
 """
 app.py
 Entry point SIPAKAR AHP DDTC Library (Sistem Prioritas Koleksi Perpustakaan
-berbasis AHP). Menangani inisialisasi database, login, dan routing halaman.
+berbasis AHP). Menangani inisialisasi database, login, dan routing halaman
+via st.navigation (menu sidebar rapi & urutannya eksplisit, tidak bergantung
+pada nama file).
 
 Jalankan dengan:
     streamlit run app.py
@@ -60,22 +62,13 @@ def render_login():
         )
 
 
-def render_sidebar_user_box():
-    auth.sidebar_user_box()
-
-
-if not auth.is_logged_in():
-    render_login()
-else:
-    render_sidebar_user_box()
+def render_home():
     st.markdown("## 📚 SIPAKAR AHP — DDTC Library")
     st.markdown(
         "Sistem Pendukung Keputusan penentuan **prioritas pengembangan koleksi buku pajak** "
         "menggunakan metode **Analytical Hierarchy Process (AHP)** multi-pakar berbasis rubrik data objektif."
     )
-    st.info("👈 Pilih halaman pada menu sebelah kiri untuk mulai bekerja: Dashboard, Data Buku, "
-            "Kriteria & Rubrik, Data Pakar, Perbandingan Kriteria, Proses & Hasil AHP, Analisis Anggaran, "
-            "Laporan, Riwayat Perhitungan, dan Manajemen Pengguna.")
+    st.info("👈 Pilih halaman pada menu sebelah kiri untuk mulai bekerja.")
 
     from db import repository as repo
     c1, c2, c3, c4 = st.columns(4)
@@ -84,3 +77,41 @@ else:
     c3.metric("🧭 Kriteria", len(repo.list_kriteria()))
     latest = repo.get_latest_batch()
     c4.metric("🧮 Batch Terakhir", latest["batch_id"] if latest else "Belum ada")
+
+
+# ---------------------------------------------------------------------------
+# Routing
+# ---------------------------------------------------------------------------
+if not auth.is_logged_in():
+    render_login()
+else:
+    beranda = st.Page(render_home, title="Beranda", icon="🏠", default=True)
+
+    dashboard = st.Page("app_pages/dashboard.py", title="Dashboard", icon="📊")
+
+    data_buku = st.Page("app_pages/data_buku.py", title="Data Buku", icon="📚")
+    kriteria_rubrik = st.Page("app_pages/kriteria_rubrik.py", title="Kriteria & Rubrik", icon="🧭")
+    data_pakar = st.Page("app_pages/data_pakar.py", title="Data Pakar", icon="🧑‍🏫")
+
+    perbandingan = st.Page("app_pages/perbandingan_kriteria.py", title="Perbandingan Kriteria", icon="⚖️")
+    proses_hasil = st.Page("app_pages/proses_hasil_ahp.py", title="Proses & Hasil AHP", icon="🧮")
+    anggaran = st.Page("app_pages/analisis_anggaran.py", title="Analisis Anggaran", icon="💰")
+
+    laporan = st.Page("app_pages/laporan.py", title="Laporan", icon="🖨️")
+    riwayat = st.Page("app_pages/riwayat_perhitungan.py", title="Riwayat Perhitungan", icon="🕘")
+
+    nav_dict = {
+        "Utama": [beranda, dashboard],
+        "Master Data": [data_buku, kriteria_rubrik, data_pakar],
+        "Proses AHP": [perbandingan, proses_hasil, anggaran],
+        "Laporan": [laporan, riwayat],
+    }
+
+    if auth.current_user()["role"] == "admin":
+        pengguna = st.Page("app_pages/manajemen_pengguna.py", title="Manajemen Pengguna", icon="👤")
+        log_aktivitas = st.Page("app_pages/log_aktivitas.py", title="Log Aktivitas", icon="📜")
+        nav_dict["Administrasi"] = [pengguna, log_aktivitas]
+
+    auth.sidebar_user_box()
+    nav = st.navigation(nav_dict)
+    nav.run()

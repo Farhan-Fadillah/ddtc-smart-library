@@ -28,19 +28,19 @@ stack **Python 3.11+ · Streamlit · SQLite · Pandas · NumPy**.
 
 ```
 sipakar_ahp_ddtc/
-├── app.py                          # Entry point Streamlit (login + init DB)
-├── pages/                          # Halaman multipage Streamlit
-│   ├── 1_📊_Dashboard.py
-│   ├── 2_📚_Data_Buku.py            # Form Master 1
-│   ├── 3_🧭_Kriteria_Rubrik.py      # Form Master 2
-│   ├── 4_🧑‍🏫_Data_Pakar.py          # Form Master 3
-│   ├── 5_⚖️_Perbandingan_Kriteria.py
-│   ├── 6_🧮_Proses_Hasil_AHP.py
-│   ├── 7_💰_Analisis_Anggaran.py
-│   ├── 8_🖨️_Laporan.py              # 4 Laporan Utama
-│   ├── 9_🕘_Riwayat_Perhitungan.py
-│   ├── 10_👤_Manajemen_Pengguna.py  # khusus Admin
-│   └── 11_📜_Log_Aktivitas.py       # khusus Admin
+├── app.py                          # Entry point: login + st.navigation (menu sidebar)
+├── app_pages/                       # Halaman-halaman aplikasi (dirouting via st.navigation)
+│   ├── dashboard.py
+│   ├── data_buku.py                 # Form Master 1
+│   ├── kriteria_rubrik.py           # Form Master 2
+│   ├── data_pakar.py                # Form Master 3
+│   ├── perbandingan_kriteria.py
+│   ├── proses_hasil_ahp.py
+│   ├── analisis_anggaran.py
+│   ├── laporan.py                   # 4 Laporan Utama
+│   ├── riwayat_perhitungan.py
+│   ├── manajemen_pengguna.py        # khusus Admin
+│   └── log_aktivitas.py             # khusus Admin
 ├── core/
 │   ├── ahp_engine.py                # normalisasi, eigenvector, CI/CR, sintesis
 │   ├── rule_engine.py               # pemetaan data mentah buku -> skor 1-5
@@ -59,6 +59,13 @@ sipakar_ahp_ddtc/
 ├── requirements.txt
 └── README.md
 ```
+
+Navigasi sidebar didefinisikan secara eksplisit di `app.py` memakai
+`st.Page`/`st.navigation` (bukan mengandalkan urutan nama file), dikelompokkan
+menjadi 4 bagian: **Utama**, **Master Data**, **Proses AHP**, **Laporan** —
+ditambah **Administrasi** yang hanya muncul untuk role Admin. Pengguna tanpa
+hak admin bahkan tidak bisa membuka URL halaman admin secara langsung karena
+halaman tersebut tidak terdaftar di navigasi mereka.
 
 ## Instalasi & Menjalankan
 
