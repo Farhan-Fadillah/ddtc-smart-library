@@ -8,7 +8,6 @@ from core import auth
 from db import repository as repo
 
 auth.require_login()
-auth.sidebar_user_box()
 
 st.title("📊 Dashboard")
 

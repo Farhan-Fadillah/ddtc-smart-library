@@ -9,7 +9,6 @@ from core.ahp_engine import hitung_alokasi_anggaran
 from db import repository as repo
 
 auth.require_login()
-auth.sidebar_user_box()
 
 st.title("💰 Parameter & Analisis Anggaran")
 st.caption(

@@ -7,7 +7,6 @@ from core import auth
 from db import repository as repo
 
 auth.require_admin()
-auth.sidebar_user_box()
 
 st.title("📜 Log Aktivitas")
 st.caption("Audit trail seluruh aksi penting: login, perubahan pairwise, eksekusi perhitungan AHP, dan perubahan data buku.")

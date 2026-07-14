@@ -7,7 +7,6 @@ from core import auth
 from db import repository as repo
 
 auth.require_admin()
-auth.sidebar_user_box()
 
 st.title("👤 Manajemen Pengguna")
 st.caption("Khusus Admin. Kelola akun internal (Admin & Pustakawan) yang dapat login ke sistem.")

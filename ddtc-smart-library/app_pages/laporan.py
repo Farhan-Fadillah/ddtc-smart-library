@@ -10,7 +10,6 @@ from core.ahp_engine import calculate_ahp
 from db import repository as repo
 
 auth.require_login()
-auth.sidebar_user_box()
 
 st.title("🖨️ Laporan Utama")
 st.caption("Empat laporan resmi hasil perhitungan AHP, dapat dipratinjau dan diekspor ke Excel.")

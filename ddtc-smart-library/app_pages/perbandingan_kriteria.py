@@ -9,7 +9,6 @@ from core.ahp_engine import calculate_ahp
 from db import repository as repo
 
 auth.require_login()
-auth.sidebar_user_box()
 
 st.title("⚖️ Perbandingan Berpasangan Kriteria")
 st.caption(

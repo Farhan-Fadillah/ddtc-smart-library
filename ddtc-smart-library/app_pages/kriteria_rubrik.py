@@ -7,7 +7,6 @@ from core import auth
 from db import repository as repo
 
 auth.require_login()
-auth.sidebar_user_box()
 
 st.title("🧭 Form Master: Kriteria & Rubrik")
 st.caption("8 kriteria keputusan (K1–K8) beserta rubrik skala penilaian 1–5. "

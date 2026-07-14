@@ -10,7 +10,6 @@ from core.ahp_engine import hitung_bobot_kriteria_multi_pakar, sintesis_skor_buk
 from db import repository as repo
 
 auth.require_login()
-auth.sidebar_user_box()
 
 st.title("🧮 Proses & Hasil Perhitungan AHP")
 st.caption(

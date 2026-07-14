@@ -7,7 +7,6 @@ from core import auth, rule_engine
 from db import repository as repo
 
 auth.require_login()
-auth.sidebar_user_box()
 
 st.title("📚 Form Master: Data Buku")
 st.caption("Kelola daftar buku kandidat/usulan pengadaan. Skor K1–K8 dihitung otomatis oleh rule engine setiap kali data disimpan.")
