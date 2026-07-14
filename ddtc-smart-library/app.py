@@ -85,20 +85,20 @@ def render_home():
 if not auth.is_logged_in():
     render_login()
 else:
-    beranda = st.Page(render_home, title="Beranda", icon="🏠", default=True)
+    beranda = st.Page(render_home, title="Beranda", icon=":material/home:", default=True)
 
-    dashboard = st.Page("app_pages/dashboard.py", title="Dashboard", icon="📊")
+    dashboard = st.Page("app_pages/dashboard.py", title="Dashboard", icon=":material/bar_chart:")
 
-    data_buku = st.Page("app_pages/data_buku.py", title="Data Buku", icon="📚")
-    kriteria_rubrik = st.Page("app_pages/kriteria_rubrik.py", title="Kriteria & Rubrik", icon="🧭")
-    data_pakar = st.Page("app_pages/data_pakar.py", title="Data Pakar", icon="🧑‍🏫")
+    data_buku = st.Page("app_pages/data_buku.py", title="Data Buku", icon=":material/menu_book:")
+    kriteria_rubrik = st.Page("app_pages/kriteria_rubrik.py", title="Kriteria & Rubrik", icon=":material/rule:")
+    data_pakar = st.Page("app_pages/data_pakar.py", title="Data Pakar", icon=":material/groups:")
 
-    perbandingan = st.Page("app_pages/perbandingan_kriteria.py", title="Perbandingan Kriteria", icon="⚖️")
-    proses_hasil = st.Page("app_pages/proses_hasil_ahp.py", title="Proses & Hasil AHP", icon="🧮")
-    anggaran = st.Page("app_pages/analisis_anggaran.py", title="Analisis Anggaran", icon="💰")
+    perbandingan = st.Page("app_pages/perbandingan_kriteria.py", title="Perbandingan Kriteria", icon=":material/balance:")
+    proses_hasil = st.Page("app_pages/proses_hasil_ahp.py", title="Proses & Hasil AHP", icon=":material/calculate:")
+    anggaran = st.Page("app_pages/analisis_anggaran.py", title="Analisis Anggaran", icon=":material/payments:")
 
-    laporan = st.Page("app_pages/laporan.py", title="Laporan", icon="🖨️")
-    riwayat = st.Page("app_pages/riwayat_perhitungan.py", title="Riwayat Perhitungan", icon="🕘")
+    laporan = st.Page("app_pages/laporan.py", title="Laporan", icon=":material/print:")
+    riwayat = st.Page("app_pages/riwayat_perhitungan.py", title="Riwayat Perhitungan", icon=":material/history:")
 
     nav_dict = {
         "Utama": [beranda, dashboard],
@@ -108,8 +108,8 @@ else:
     }
 
     if auth.current_user()["role"] == "admin":
-        pengguna = st.Page("app_pages/manajemen_pengguna.py", title="Manajemen Pengguna", icon="👤")
-        log_aktivitas = st.Page("app_pages/log_aktivitas.py", title="Log Aktivitas", icon="📜")
+        pengguna = st.Page("app_pages/manajemen_pengguna.py", title="Manajemen Pengguna", icon=":material/manage_accounts:")
+        log_aktivitas = st.Page("app_pages/log_aktivitas.py", title="Log Aktivitas", icon=":material/receipt_long:")
         nav_dict["Administrasi"] = [pengguna, log_aktivitas]
 
     auth.sidebar_user_box()
